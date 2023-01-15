@@ -1,0 +1,173 @@
+<div class="container">
+  <legend>Add student</legend>
+
+  <div class="row">
+  <div class="col col-md-8">
+
+
+  <!-- form -->
+  <form [formGroup]="studentForm" #gfg="ngForm">
+
+    <p>
+      <label for="rollno">Roll no.</label>
+      <input type="text" id="rollno" name="rollno" formControlName="rollno" #roll>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('rollno')?.hasError('required')">
+      *Rollno  required</small>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('rollno')?.hasError('pattern')">
+        Enter only number</small>
+    </p>
+
+    <p>
+      <label for="firstname">First Name </label>
+      <input type="text" id="firstname" name="firstname" formControlName="firstname" #firstname>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('firstname')?.hasError('required')">
+        *Firstname required</small>
+    </p>
+
+    <p>
+      <label for="lastname">Last Name </label>
+      <input type="text" id="lastname" name="lastname" formControlName="lastname" #lastname>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('lastname')?.hasError('required')">
+        *Lasttname required</small>
+    </p>
+
+    <p *ngIf="!isViewMode">
+      <label for="dob">DOB</label>
+      <input type="date" id="dob" name="dob" formControlName="dob" #dob>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('dob')?.hasError('required')">
+        *DOB required</small>
+    </p>
+
+    <p *ngIf="isViewMode">
+      <label for="age">Age</label>
+      <input type="text" id="age" name="age" formControlName="age" #dob>
+     
+    </p>
+
+    <!-- <p>
+      <input type="text" #gender>Gender
+      <label >
+        <input type="radio" value="Male" formControlName="gender">
+        <span>Male</span>
+      </label>
+      <label >
+        <input type="radio" value="Female" formControlName="gender">
+        <span>Female</span>
+      </label>
+    </p> -->
+
+
+    <p>
+      <label >Gender </label>
+      <input type="radio" value="male"  name="gender" formControlName="gender" > Male
+      <input type="radio" value="female"  name="gender" formControlName="gender" #gender> Female <br>
+      <small style="color: red;"*ngIf="isAddToListClicked && studentForm.get('gender')?.hasError('required')">
+        *Gender required</small>
+    </p>
+
+    <p>
+      <label for="courseName">Select course</label>
+      <input type="text" class="form-control" formControlName="courseName" id="courseName"
+      list="course" placeholder="Search" #courseName>
+      <datalist id="course">
+          <option value="CS1"></option>
+          <option value="CS2"></option>
+          <option value="CS3"></option>
+      </datalist>
+      <small style="color: red;"*ngIf="isAddToListClicked && studentForm.get('courseName')?.hasError('required')">
+        *Course required</small>
+    </p>
+    <!-- <p>
+      <label for="coursename">Select course</label>
+      <input type="text" class="form-control" formControlName="coursename" id="coursename"
+      list="courses" placeholder="Search course" #coursename>
+      <datalist id="courses">
+        <option value="CS1"></option>
+        <option value="CS2"></option>
+        <option value="CS3"></option>
+      </datalist>
+    </p> -->
+    <!-- <option value="Machine Learning"></option>
+          <option value="Data Science"></option>
+          <option value="Satellite Com"></option>
+          <option value="Electrical"></option> -->
+
+
+
+    <!-- <p>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </p> -->
+
+    <p>
+      <label for="department">Department </label>
+      <select id="country" name="department" formControlName="department" #department>
+        <option value="CSE">Computer Science</option>
+        <option value="ENTC">Electroincs</option>
+      </select>
+      <small style="color: red;" *ngIf="isAddToListClicked && studentForm.get('department')?.hasError('required')">
+        *Firstname required</small>
+    </p>
+
+
+    <!-- <p>
+      <label for="hobbies" >Hobbies</label><br>
+      <input type="checkbox" value="arts" id="hobbies" name="hobbies" formControlName="hobbies" #hobbies> Arts <br>
+      <input type="checkbox" value="music" id="hobbies" name="hobbies" formControlName="hobbies" #hobbies> Music <br>
+      <input type="checkbox" value="sports" id="hobbies" name="hobbies" formControlName="hobbies" #hobbies> Sports
+    </p> -->
+  
+    
+      <label for="hobbies" >Hobbies</label><br>
+      <div *ngFor="let data of checkboxData;">
+        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+        {{data.name}}
+      </div>
+  
+
+
+      <div class="row">
+        <div class="col" *ngIf="!isViewMode">
+          <p><button type="submit" class="btn btn-primary" (click)="TransferData()" >Add to list</button></p>
+        </div>
+
+        <!-- <div class="col"  *ngIf="!isViewMode">
+          <p><button type="submit" class="btn btn-primary" >Save</button></p>
+           (click)="onSubmit()"
+        </div> -->
+
+        <div class="col">
+          <p><button type="submit" class="btn btn-secondary" (click)="Closepopup()">Close</button></p>
+        </div>
+
+      </div>
+
+      {{gfg.value | json}}
+  </form>
+
+
+  </div>
+
+  <div class="col" *ngIf="!isViewMode">
+    <!-- Updated List -->
+    <legend>Updated List</legend>
+
+   <app-updatelist (tableEvent)="tableData($event)"></app-updatelist>
+
+   <!-- [objdata]="inputobj" -->
+  </div>
+
+  </div>
+  </div>

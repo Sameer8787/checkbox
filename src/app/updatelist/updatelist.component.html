@@ -1,0 +1,24 @@
+
+
+ <ul *ngFor="let item of listarray">
+  <li>Roll no: {{item.rollno}} </li>
+  <li>First Name: {{item.firstname}} </li>
+  <li>Last Name:{{item.lastname}} </li>
+  <li>Name:{{item.name}}</li>
+  <li>DOB: {{item.dob}} </li>
+  <li>Gender: {{item.gender}} </li>
+  <li>Course name: {{item.courseName}} </li>
+  <li>Department: {{item.department}} </li>
+  <li>Hobbies: {{item.hobbies}} </li>
+
+</ul>
+<button  class="btn btn-primary" (click)="addData()">Save</button>
+
+<!-- <form [formGroup]="listStudent" >
+  <table>
+    <th>Upadted list</th>
+    <td></td>
+  </table>
+</form> -->
+
+<!-- <p><button type="submit" class="btn btn-primary" (click)="onSubmit()" >Save</button></p> -->

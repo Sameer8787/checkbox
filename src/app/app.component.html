@@ -1,0 +1,128 @@
+
+<!-- pop up -->
+<div>
+
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="add" (click)="openDialog()">Add</mat-button-toggle>
+    <mat-button-toggle value="edit" (click)="openView()">View</mat-button-toggle>
+    <mat-button-toggle value="edit">Edit</mat-button-toggle>
+    <mat-button-toggle value="delete" (click)="deleteStudents()">Delete</mat-button-toggle>
+    <mat-button-toggle value="refresh" (click)="refreshStudent()">Refresh</mat-button-toggle>
+    <mat-button-toggle value="reset" class="reset" (click)="clearFilter()">Reset</mat-button-toggle>
+
+  </mat-button-toggle-group>
+
+
+  <!-- <button class="btn btn-lg btn-outline-primary" (click)="openDialog()">Add</button> -->
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Student</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <app-form></app-form>
+  </div>
+
+  </ng-template>
+  </div>
+  <br>
+
+  <!-- ddl -->
+
+  <div class="row">
+
+    <div class="col">
+    <mat-form-field appearance="fill">
+      <mat-label>Student List</mat-label>
+      <mat-select [(ngModel)]="sortingParameter">
+        <mat-option *ngFor="let student of studentsddl" [value]="student.value"
+        >
+          {{student.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+    <!-- asc n dsc -->
+    <div class="col">
+    <mat-button-toggle-group [(ngModel)]="sortingDirection" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="ascending" (click)="sortStudents('asc')" >Ascend </mat-button-toggle>
+      <mat-button-toggle value="descending" (click)="sortStudents('desc')"  >Descend</mat-button-toggle>
+   </mat-button-toggle-group>
+  </div>
+
+  <!-- radio -->
+  <div class="col">
+    <mat-radio-group [(ngModel)]="filteringType" >
+      <mat-radio-button value="contains">Contains</mat-radio-button>
+      <mat-radio-button value="startswith">Starts with</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+<!-- input -->
+<div class="col">
+  <div class="form-group">
+    <input type="text" (input)="filterStudents()"
+    class="form-control" placeholder="filter here"
+    [(ngModel)]="filteredString"
+    />
+
+  </div>
+</div>
+
+    </div>
+<br><br><br>
+
+<!-- table -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <!-- <th>Status
+        <input type="for-check-input" type="checkbox">
+      </th> -->
+      <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="
+        checkAllCheckBox($event)"></th>
+
+      <th>Rollno</th>
+      <th>Name</th>
+      <th>age</th>
+      <th>Gender</th>
+      <th>courseName</th>
+      <th> Department</th>
+      <th>Hobbies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let student of allStudents">   |filter:filteredString; -->
+      <tr *ngFor="let student of filteredStudents; let i=index; let odd=odd" [ngClass]="odd ? 'odd_col': 'even_col'">
+        <td><input type="checkbox" [value]="i" [(ngModel)]="allStudents[i].checked"
+
+          (change)="getStudentRoll($event,student.rollno)"
+           [checked]="selcetedStudentIndices.indexOf(student.rollno)>=0"
+          ></td>
+      <!-- <td>{{student.status}}</td> -->
+      <td>{{student.rollno}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.age}}</td>
+      <td>{{student.gender}}</td>
+      <td>{{student.courseName}}</td>
+      <td>{{student.department}}</td>
+      <td>{{student.hobbies}}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+

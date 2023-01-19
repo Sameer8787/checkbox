@@ -7,6 +7,7 @@ import{map, startWith} from 'rxjs/operators';
 import { CallService } from '../service/call.service';
 
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -14,10 +15,7 @@ import { CallService } from '../service/call.service';
 })
 export class FormComponent implements OnInit {
 
-  // myControl = new FormControl('');
-  // options: string[] = ['One', 'Two', 'Three'];
-  // filteredOptions!: Observable<string[]>;
-
+  selectedHobby:any=[];
   viewStudent:any;
   isViewMode:boolean = false;
 isAddToListClicked: boolean = false;
@@ -82,10 +80,12 @@ constructor(private fb: FormBuilder,
                if(this.viewStudent){
                 this.isViewMode = true;
                 this.initializeViewForm(this.viewStudent);
+                
              }
                
             }
 
+ 
  
 initializeViewForm(student:any){
 console.log(this.studentForm);
@@ -110,8 +110,12 @@ this.studentForm.get("courseName")?.disable();
 this.studentForm.get("department")?.setValue(student.department);
 this.studentForm.get("department")?.disable();
 
-this.studentForm.get("hobbies")?.setValue(student.hobbies);
-this.studentForm.get("hobbies")?.disable();
+this.selectedHobby = student.hobbies.split(",");
+const selectCheckbox: FormArray = this.studentForm.get('hobbies') as FormArray;
+selectCheckbox.push(new FormControl(student.hobbies));
+
+// this.studentForm.get("hobbies")?.setValue(student.hobbies);
+// this.studentForm.get("hobbies")?.disable();
 } 
 
 Closepopup(){
@@ -125,7 +129,7 @@ Closepopup(){
 // }
 
 ngOnInit():void{
- 
+
 
 }
 
@@ -135,13 +139,13 @@ createForm(){
     rollno: ["",[ Validators.required, Validators.pattern("^[0-9]*$")]],
     firstname: ["", [Validators.required]],
     lastname: ["",[ Validators.required]],
+    age:[""],
     dob:["",[Validators.required]],
     gender: ["", [Validators.required]],
     courseName:["",[Validators.required]],
     department:["", [Validators.required]],
     hobbies: this.fb.array([]),
     //  hobbies :[""],
-     age:[""]
    // myControl:[''],
 
   });

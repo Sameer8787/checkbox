@@ -16,7 +16,7 @@ export class CallService {
     "gender":'male',
     "courseName":'CS3',
    "department":'CSE',
-   "hobbies":'arts',
+   "hobbies":'arts,music',
   },
   {"status":'',
     "rollno":'2',
@@ -25,7 +25,7 @@ export class CallService {
     "gender":'male',
     "courseName":'CS2',
    "department":'ENTC',
-   "hobbies":'arts',
+   "hobbies":'arts,music,sports',
   },
   {
     "rollno":'3',

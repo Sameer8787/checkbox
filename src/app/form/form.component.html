@@ -40,7 +40,7 @@
 
     <p *ngIf="isViewMode">
       <label for="age">Age</label>
-      <input type="text" id="age" name="age" formControlName="age" #dob>
+      <input type="text" id="age" name="age" formControlName="age">
      
     </p>
 
@@ -132,7 +132,7 @@
     
       <label for="hobbies" >Hobbies</label><br>
       <div *ngFor="let data of checkboxData;">
-        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" [checked]="selectedHobby.indexOf(data.value) != -1" />
         {{data.name}}
       </div>
   
@@ -161,12 +161,8 @@
   </div>
 
   <div class="col" *ngIf="!isViewMode">
-    <!-- Updated List -->
     <legend>Updated List</legend>
-
    <app-updatelist (tableEvent)="tableData($event)"></app-updatelist>
-
-   <!-- [objdata]="inputobj" -->
   </div>
 
   </div>

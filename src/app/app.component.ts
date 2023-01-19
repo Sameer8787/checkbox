@@ -44,8 +44,6 @@ export class AppComponent implements OnInit {
   selectedItems!: string[];
 
   filteredString!:string;
-
-
   popoverTitle = 'Popover title';
   popoverMessage = 'Popover description';
   confirmClicked = false;
@@ -163,6 +161,8 @@ openView(){
   // ddl
   studentsddl: Student[] = [
     {value: 'rollno', viewValue: 'RollNo'},
+    {value: 'firstname', viewValue: 'Firstname'},
+    {value: 'lastname', viewValue: 'Lastname'},
     {value: 'name', viewValue: 'Name'},
     {value: 'age', viewValue: 'Age'},
     {value: 'gender', viewValue: 'Gender'},
